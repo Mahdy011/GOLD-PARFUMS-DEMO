@@ -124,7 +124,7 @@ function getCart() {
 }
 
 function saveCart(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(
+   localStorage.setItem("goldPafrumsCart", JSON.stringify(cart));
         cart.map(function(item) {
             return {
                 name: item.name,
