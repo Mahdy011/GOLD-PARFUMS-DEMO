@@ -111,13 +111,48 @@ function readStoredCart(key){
   }
 }
 
-function getCart(){
-  let stored = readStoredCart(CART_KEY);
 
-  // Compatibilité avec l'ancien panier.
-  if(stored.length === 0){
-    stored = readStoredCart("goldCart");
-  }
+function getCart() {
+    let stored = [];
+
+    try {
+        stored = JSON.parse(localStorage.getItem("goldPafrumsCart")) || [];
+
+        if (!Array.isArray(stored) || stored.length === 0) {
+            stored = JSON.parse(localStorage.getItem("goldCart")) || [];
+        }
+    } catch (error) {
+        stored = [];
+    }
+
+    if (!Array.isArray(stored)) return [];
+
+    const result = [];
+
+    stored.forEach(function(item) {
+        if (!item) return;
+
+        const name = String(item.name || item.product || "").trim();
+        if (!prices[name]) return;
+
+        const qty = Math.floor(Number(item.quantity || item.qty || 1));
+        if (qty < 1) return;
+
+        const existing = result.find(function(row) {
+            return row.name === name;
+        });
+
+        if (existing) {
+            existing.qty += qty;
+        } else {
+            result.push({ name: name, qty: qty });
+        }
+    });
+
+    return result;
+}
+
+
 
   const result = [];
 
