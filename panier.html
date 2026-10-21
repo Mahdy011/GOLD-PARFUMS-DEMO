@@ -152,38 +152,6 @@ function getCart() {
     return result;
 }
 
-
-
-  const result = [];
-
-  stored.forEach(function(item){
-    if(!item) return;
-
-    const name = String(item.name || item.product || "").trim();
-    const price = prices[name];
-
-    if(!price) return;
-
-    const qty = Math.max(0, Math.floor(Number(
-      item.quantity || item.qty || 1
-    )));
-
-    if(qty < 1) return;
-
-    const existing = result.find(function(row){
-      return row.name === name;
-    });
-
-    if(existing){
-      existing.qty += qty;
-    }else{
-      result.push({name:name,qty:qty});
-    }
-  });
-
-  return result;
-}
-
 function saveCart(cart){
   const compatibleCart = cart.map(function(item){
     return {
