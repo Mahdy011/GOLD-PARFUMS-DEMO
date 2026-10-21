@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#171511">
+    <meta name="description" content="Finalisez votre commande chez Gold Parfum.">
+    <title>Finaliser ma commande | Gold Parfum</title>
+
+    <style>
+        :root {
+            --beige: #f5efe4;
+            --cream: #fffdf8;
+            --gold: #b18a43;
+            --gold-light: #d6b66a;
+            --black: #171511;
+            --text: #252019;
+            --muted: #817769;
+            --border: #e8dcc8;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(ellipse at top, #fffaf1 0%, transparent 55%),
+                var(--beige);
+            color: var(--text);
+        }
+
+        header {
+            background: var(--black);
+            color: var(--gold-light);
+            text-align: center;
+            padding: 23px 15px;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .brand {
+            font-family: Georgia, serif;
+            font-size: 25px;
+            letter-spacing: 3px;
+            margin: 0 0 15px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .navigation a:hover {
+            color: var(--gold-light);
+        }
+
+        main {
+            width: min(760px, 92%);
+            margin: 0 auto;
+            padding: 38px 0 45px;
+            flex: 1;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        h1, h2 {
+            font-family: Georgia, serif;
+        }
+
+        h1 {
+            font-size: clamp(30px, 5vw, 40px);
+            font-weight: normal;
+            margin: 12px 0;
+        }
+
+        .intro p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--black);
+            color: var(--gold-light);
+            font-family: Georgia, serif;
+            font-size: 17px;
+        }
+
+        .step h2 {
+            margin: 0 0 4px;
+            font-size: 21px;
+            font-weight: normal;
+        }
+
+        .step p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .panel {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 27px;
+            margin-bottom: 27px;
+            box-shadow: 0 9px 30px rgba(23, 21, 17, 0.055);
+        }
+
+        #summary {
+            min-height: 30px;
+        }
+
+        .product-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .product-info {
+            min-width: 0;
+        }
+
+        .product-name {
+            font-weight: bold;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .product-quantity {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .product-price {
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .totals {
+            padding-top: 13px;
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 9px 0;
+            font-size: 14px;
+        }
+
+        .total-line span:first-child {
+            color: var(--muted);
+        }
+
+        .grand-total {
+            border-top: 1px solid var(--gold);
+            margin-top: 12px;
+            padding: 19px 0 5px;
+            font-size: 17px;
+        }
+
+        .grand-total span:first-child {
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        .grand-total span:last-child {
+            color: var(--gold);
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .delivery-note {
+            margin: 12px 0 0;
+            padding: 12px;
+            background: #f6f0e5;
+            color: #756746;
+            border-radius: 7px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+            padding: 12px 0;
+        }
+
+        .empty a {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 18px;
+        }
+
+        .field {
+            margin-bottom: 19px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .required {
+            color: var(--gold);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #dfd1bb;
+            border-radius: 7px;
+            background: var(--white);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #aaa194;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(177, 138, 67, 0.12);
+        }
+
+        textarea {
+            min-height: 105px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .privacy-note {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+            margin: 2px 0 0;
+        }
+
+        .submit-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px 18px;
+            margin-top: 22px;
+            border: 1px solid var(--gold);
+            border-radius: 7px;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.25s;
+        }
+
+        .submit-button:hover:not(:disabled) {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .whatsapp-icon {
+            font-size: 20px;
+        }
+
+        #message {
+            line-height: 1.7;
+            margin: 16px 0 0;
+            font-size: 13px;
+            white-space: pre-line;
+            overflow-wrap: anywhere;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 0 0 20px;
+            color: #805d22;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: var(--black);
+            color: #fff;
+            text-align: center;
+            padding: 20px 15px;
+            border-top: 3px solid var(--gold);
+            font-size: 12px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .developer {
+            color: var(--gold-light);
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 520px) {
+            main {
+                width: 92%;
+                padding-top: 28px;
+            }
+
+            .brand {
+                font-size: 21px;
+                letter-spacing: 2px;
+            }
+
+            .panel {
+                padding: 20px 17px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .grand-total span:last-child {
+                font-size: 22px;
+            }
+
+            .navigation {
+                gap: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <p class="brand">GOLD PARFUM</p>
+        <nav class="navigation" aria-label="Navigation principale">
+            <a href="index.html">Boutique</a>
+            <a href="panier.html">Mon panier</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="intro">
+            <span class="eyebrow">Une touche d'élégance</span>
+            <h1>Finaliser ma commande</h1>
+            <p>
+                Quelques informations et votre sélection de parfums sera
+                prête. Merci de faire confiance à Gold Parfum.
+            </p>
+        </div>
+
+        <section aria-labelledby="summary-title">
+            <div class="step">
+                <div class="step-number">01</div>
+                <div>
+                    <h2 id="summary-title">Votre sélection</h2>
+                    <p>Vérifiez vos parfums et le montant de la commande.</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div id="summary" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section aria-labelledby="customer-title">
+            <div class="step">
+                <div class="step-number">02</div>
+                <div>
+                    <h2 id="customer-title">Vos informations</h2>
+                    <p>Indiquez les informations nécessaires à la livraison.</p>
+                </div>
+            </div>
+
+            <form id="form" class="panel">
+                <div class="form-grid">
+                    <div class="field full">
+                        <label for="name">
+                            Nom et prénom <span class="required">*</span>
+                        </label>
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            placeholder="Ex. Mohamed Ben Ali"
+                            autocomplete="name"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="field full">
+                        <label for="phone">
+                            Numéro de téléphone <span class="required">*</span>
+                        </label>
+                        <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            placeholder="Ex. 20 123 456"
+                            autocomplete="tel"
+                            maxlength="25"
+                            required
+                        >
+                    </div>
+
+                    <div class="field full">
+                        <label for="address">
+                            Adresse de livraison <span class="required">*</span>
+                        </label>
+                        <textarea
+                            id="address"
+                            name="address"
+                            placeholder="Gouvernorat, ville, quartier, rue et numéro..."
+                            autocomplete="street-address"
+                            maxlength="500"
+                            required
+                        ></textarea>
+                    </div>
+                </div>
+
+                <p class="privacy-note">
+                    * Champs obligatoires. Vos informations seront ajoutées
+                    au message WhatsApp pour préparer votre commande.
+                </p>
+
+                <button class="submit-button" type="submit">
+                    <span class="whatsapp-icon" aria-hidden="true">✆</span>
+                    Confirmer sur WhatsApp
+                </button>
+
+                <p id="message" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <a class="back-link" href="panier.html">
+            &#8592; Retour au panier
+        </a>
+    </main>
+
+    <footer>
+        <p>© 2026 Gold Parfum — Tous droits réservés.</p>
+        <p class="developer">Developed by DADI 1008</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const prices = {
+                "Yara": 45,
+                "D&G Devotion": 75,
+                "Delina": 75,
+                "Interdit": 75,
+                "Kayali": 45,
+                "My Burberry": 75,
+                "Prada": 45
+            };
+
+            const DELIVERY_FEE = 7;
+            const WHATSAPP_NUMBER = "21628442260";
+
+            const summary = document.getElementById("summary");
+            const form = document.getElementById("form");
+            const message = document.getElementById("message");
+            const submitButton = form.querySelector("button");
+
+            function getCart() {
+                try {
+                    const cart = JSON.parse(
+                        localStorage.getItem("goldCart")
+                    );
+                    return Array.isArray(cart) ? cart : [];
+                } catch (error) {
+                    return [];
+                }
+            }
+
+            function getValidCart() {
+                return getCart().filter(function (item) {
+                    return item &&
+                        Object.prototype.hasOwnProperty.call(
+                            prices, item.name
+                        ) &&
+                        Number.isSafeInteger(Number(item.qty)) &&
+                        Number(item.qty) > 0 &&
+                        Number(item.qty) <= 1000;
+                });
+            }
+
+            function calculateSubtotal(cart) {
+                return cart.reduce(function (total, item) {
+                    return total +
+                        prices[item.name] * Number(item.qty);
+                }, 0);
+            }
+
+            function createTotalLine(label, amount, className) {
+                const line = document.createElement("div");
+                line.className = "total-line" +
+                    (className ? " " + className : "");
+
+                const labelSpan = document.createElement("span");
+                labelSpan.textContent = label;
+
+                const amountSpan = document.createElement("span");
+                amountSpan.textContent = amount + " DT";
+
+                line.appendChild(labelSpan);
+                line.appendChild(amountSpan);
+
+                return line;
+            }
+
+            function showSummary() {
+                const cart = getValidCart();
+                summary.replaceChildren();
+
+                if (cart.length === 0) {
+                    const empty = document.createElement("p");
+                    empty.className = "empty";
+                    empty.textContent =
+                        "Votre panier est vide. Choisissez vos parfums avant de passer commande.";
+
+                    const link = document.createElement("a");
+                    link.href = "index.html";
+                    link.textContent = "Découvrir nos parfums";
+
+                    empty.appendChild(document.createElement("br"));
+                    empty.appendChild(link);
+                    summary.appendChild(empty);
+
+                    submitButton.disabled = true;
+                    return;
+                }
+
+                submitButton.disabled = false;
+
+                cart.forEach(function (item) {
+                    const quantity = Number(item.qty);
+                    const line = document.createElement("div");
+                    line.className = "product-line";
+
+                    const info = document.createElement("div");
+                    info.className = "product-info";
+
+                    const name = document.createElement("div");
+                    name.className = "product-name";
+                    name.textContent = item.name;
+
+                    const qty = document.createElement("span");
+                    qty.className = "product-quantity";
+                    qty.textContent = "Quantité : " + quantity;
+
+                    const price = document.createElement("strong");
+                    price.className = "product-price";
+                    price.textContent =
+                        (prices[item.name] * quantity) + " DT";
+
+                    info.appendChild(name);
+                    info.appendChild(qty);
+                    line.appendChild(info);
+                    line.appendChild(price);
+                    summary.appendChild(line);
+                });
+
+                const subtotal = calculateSubtotal(cart);
+                const totals = document.createElement("div");
+                totals.className = "totals";
+
+                totals.appendChild(
+                    createTotalLine("Sous-total", subtotal)
+                );
+
+                totals.appendChild(
+                    createTotalLine("Livraison", DELIVERY_FEE)
+                );
+
+                totals.appendChild(
+                    createTotalLine(
+                        "Total à payer",
+                        subtotal + DELIVERY_FEE,
+                        "grand-total"
+                    )
+                );
+
+                const note = document.createElement("p");
+                note.className = "delivery-note";
+                note.textContent =
+                    "Les frais de livraison sont fixés à 7 DT par commande.";
+
+                totals.appendChild(note);
+                summary.appendChild(totals);
+            }
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                message.textContent = "";
+
+                const cart = getValidCart();
+
+                if (cart.length === 0) {
+                    message.textContent =
+                        "Votre panier est vide. Ajoutez un parfum avant de continuer.";
+                    showSummary();
+                    return;
+                }
+
+                const name = document.getElementById("name").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const address = document.getElementById("address").value.trim();
+
+                if (!name || !phone || !address) {
+                    message.textContent =
+                        "3abbi les champs lkol 3aychek.";
+                    return;
+                }
+
+                const subtotal = calculateSubtotal(cart);
+                const total = subtotal + DELIVERY_FEE;
+
+                const lines = cart.map(function (item) {
+                    return item.name + " × " + Number(item.qty) +
+                        " — " +
+                        (prices[item.name] * Number(item.qty)) + " DT";
+                }).join("\n");
+
+                const orderText =
+                    "Bonjour Gold Parfum ! Je souhaite confirmer une commande.\n\n" +
+                    "Nom : " + name + "\n" +
+                    "Téléphone : " + phone + "\n" +
+                    "Adresse : " + address + "\n\n" +
+                    "Commande :\n" + lines + "\n\n" +
+                    "Sous-total : " + subtotal + " DT\n" +
+                    "Livraison : " + DELIVERY_FEE + " DT\n" +
+                    "TOTAL À PAYER : " + total + " DT";
+
+                const whatsappURL =
+                    "https://wa.me/" + WHATSAPP_NUMBER +
+                    "?text=" + encodeURIComponent(orderText);
+
+                const whatsappWindow = window.open(
+                    whatsappURL,
+                    "_blank"
+                );
+
+                if (!whatsappWindow) {
+                    message.textContent =
+                        "WhatsApp ma t7allech. Autorise les fenêtres pop-up dans ton navigateur, puis réessaie.";
+                    return;
+                }
+
+                message.textContent =
+                    "El commande m7adhra! Vérifie les détails dans WhatsApp, puis appuie sur Envoyer pour nous transmettre la commande.";
+            });
+
+            showSummary();
+        });
+    </script>
+</body>
+</html>
