@@ -81,29 +81,59 @@ main{margin:20px auto;padding:14px}
 </footer>
 
 <script>
+
 const prices = {
     "Yara": 45,
-    "D&G Devotion": 75,
+    "D&G Devotion": 65,
     "Delina": 75,
-    "Interdit": 75,
-    "Kayali": 45,
-    "My Burberry": 75,
+    "L'Interdit": 65,
+    "Interdit": 65,
+    "Kayali": 55,
+    "My Burberry": 60,
     "Prada": 45
 };
 
 const DELIVERY_FEE = 7;
+const CART_KEY = "goldPafrumsCart";
 
 function getCart() {
     try {
-        const cart = JSON.parse(localStorage.getItem("goldCart"));
-        return Array.isArray(cart) ? cart : [];
+        let cart = JSON.parse(localStorage.getItem(CART_KEY));
+
+        if (!Array.isArray(cart)) {
+            // Récupérer aussi les anciens paniers si présents.
+            cart = JSON.parse(localStorage.getItem("goldCart"));
+        }
+
+        if (!Array.isArray(cart)) return [];
+
+        return cart.map(function(item) {
+            const name = item.name || item.product;
+            const qty = Number(item.quantity || item.qty || 1);
+
+            return {
+                name: name,
+                qty: qty
+            };
+        }).filter(function(item) {
+            return item.name && prices[item.name] && item.qty > 0;
+        });
     } catch (error) {
         return [];
     }
 }
 
 function saveCart(cart) {
-    localStorage.setItem("goldCart", JSON.stringify(cart));
+    localStorage.setItem(CART_KEY, JSON.stringify(
+        cart.map(function(item) {
+            return {
+                name: item.name,
+                price: prices[item.name],
+                quantity: item.qty,
+                qty: item.qty
+            };
+        })
+    ));
 }
 
 function render() {
@@ -113,25 +143,18 @@ function render() {
 
     let subtotal = 0;
 
-    const validCart = cart.filter(function(item) {
-        return item && prices[item.name] && Number(item.qty) > 0;
-    });
-
-    if (validCart.length !== cart.length) {
-        saveCart(validCart);
-    }
-
-    if (validCart.length === 0) {
-        container.innerHTML = '<p class="empty">Votre panier est vide. Découvrez nos parfums !</p>';
+    if (cart.length === 0) {
+        container.innerHTML =
+            '<p class="empty">Votre panier est vide. Découvrez nos parfums !</p>';
         document.getElementById("subtotal").textContent = "0 DT";
         document.getElementById("delivery").textContent = "0 DT";
         document.getElementById("total").textContent = "0 DT";
         return;
     }
 
-    validCart.forEach(function(item, index) {
+    cart.forEach(function(item, index) {
         const price = prices[item.name];
-        const qty = Number(item.qty);
+        const qty = item.qty;
         subtotal += price * qty;
 
         const row = document.createElement("div");
@@ -142,10 +165,10 @@ function render() {
         name.textContent = item.name;
 
         const details = document.createElement("p");
-        details.textContent = price + " DT / unité — Total : " + (price * qty) + " DT";
+        details.textContent =
+            price + " DT / unité — Total : " + (price * qty) + " DT";
 
-        info.appendChild(name);
-        info.appendChild(details);
+        info.append(name, details);
 
         const controls = document.createElement("div");
         controls.className = "item-controls";
@@ -153,7 +176,6 @@ function render() {
         const minus = document.createElement("button");
         minus.type = "button";
         minus.textContent = "−";
-        minus.setAttribute("aria-label", "Diminuer " + item.name);
         minus.dataset.action = "minus";
         minus.dataset.index = index;
 
@@ -163,7 +185,6 @@ function render() {
         const plus = document.createElement("button");
         plus.type = "button";
         plus.textContent = "+";
-        plus.setAttribute("aria-label", "Augmenter " + item.name);
         plus.dataset.action = "plus";
         plus.dataset.index = index;
 
@@ -179,10 +200,12 @@ function render() {
         container.appendChild(row);
     });
 
-    const delivery = DELIVERY_FEE;
     document.getElementById("subtotal").textContent = subtotal + " DT";
-    document.getElementById("delivery").textContent = delivery + " DT";
-    document.getElementById("total").textContent = (subtotal + delivery) + " DT";
+    document.getElementById("delivery").textContent = DELIVERY_FEE + " DT";
+    document.getElementById("total").textContent =
+        (subtotal + DELIVERY_FEE) + " DT";
+
+    saveCart(cart);
 }
 
 document.getElementById("cart").addEventListener("click", function(event) {
@@ -191,18 +214,19 @@ document.getElementById("cart").addEventListener("click", function(event) {
 
     const cart = getCart();
     const index = Number(button.dataset.index);
+
     if (!cart[index]) return;
 
     if (button.dataset.action === "plus") {
-        cart[index].qty = Number(cart[index].qty) + 1;
+        cart[index].qty++;
     } else if (button.dataset.action === "minus") {
-        cart[index].qty = Number(cart[index].qty) - 1;
+        cart[index].qty--;
     } else if (button.dataset.action === "remove") {
         cart.splice(index, 1);
     }
 
     saveCart(cart.filter(function(item) {
-        return Number(item.qty) > 0;
+        return item.qty > 0;
     }));
 
     render();
