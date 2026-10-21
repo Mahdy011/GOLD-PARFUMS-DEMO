@@ -4,18 +4,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f5efe4">
 <meta name="description" content="Votre panier Gold Parfum">
-<title>Mon panier | Gold Parfum</title>
+<title>Mon panier | GOLD PARFUM</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f5efe4;color:#252019;min-height:100vh;display:flex;flex-direction:column}
+body{font-family:Arial,sans-serif;background:#f5efe4;color:#252019;min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
 header,footer{background:#171511;text-align:center;padding:22px}
 header h2{color:#d6b66a;letter-spacing:2px}
 header a{display:inline-block;color:#fffaf2;text-decoration:none;margin-top:12px}
 header a:hover{color:#d6b66a}
 main{width:100%;max-width:850px;margin:40px auto;padding:20px;flex:1}
-h1{text-align:center;font-family:Georgia,serif;margin-bottom:25px}
+h1{text-align:center;font-family:Georgia,serif;font-weight:normal;margin-bottom:25px}
 #cart{background:#fffaf2;padding:20px;border:1px solid #e6d8c1;border-radius:5px}
 .item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid #e6d8c1;flex-wrap:wrap}
 .item p{color:#756b5c;margin-top:6px;font-size:14px}
@@ -30,15 +31,16 @@ button:hover,.checkout:hover{background:#d6b66a}
 .delivery{color:#756b5c}
 .grand-total{display:flex;justify-content:space-between;gap:15px;border-top:1px solid #e6d8c1;margin-top:8px;padding-top:16px;font-size:21px;font-weight:bold;color:#8b6829}
 .actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:22px}
-footer{color:#fffaf2;font-size:13px;line-height:2}
+footer{color:#fffaf2;font-size:13px;line-height:2;margin-top:30px}
 footer span{color:#d6b66a}
+.notice{font-size:13px;color:#756b5c;margin-top:12px;text-align:center}
 @media(max-width:500px){
-main{margin:20px auto;padding:14px}
-#cart,.summary{padding:14px}
-.item{align-items:flex-start;flex-direction:column}
-.actions{flex-direction:column}
-.actions a,.actions button{text-align:center;width:100%}
-.grand-total{font-size:19px}
+ main{margin:20px auto;padding:14px}
+ #cart,.summary{padding:14px}
+ .item{align-items:flex-start;flex-direction:column}
+ .actions{flex-direction:column}
+ .actions a,.actions button{text-align:center;width:100%}
+ .grand-total{font-size:19px}
 }
 </style>
 </head>
@@ -61,13 +63,15 @@ main{margin:20px auto;padding:14px}
     </div>
     <div class="summary-line delivery">
       <span>Livraison</span>
-      <strong id="delivery">7 DT</strong>
+      <strong id="delivery">0 DT</strong>
     </div>
     <div class="grand-total">
       <span>Total à payer</span>
-      <span id="total">7 DT</span>
+      <span id="total">0 DT</span>
     </div>
   </div>
+
+  <p class="notice">Les frais de livraison sont indicatifs et restent à confirmer.</p>
 
   <div class="actions">
     <a class="checkout" href="index.html#parfums">Continuer mes achats</a>
@@ -76,172 +80,210 @@ main{margin:20px auto;padding:14px}
 </main>
 
 <footer>
-  <p>© 2026 Gold Parfum — Tous droits réservés.</p>
+  <p>© 2026 GOLD PARFUM — Tous droits réservés.</p>
   <p>Developed by <span>DADI 1008</span></p>
 </footer>
 
 <script>
-
-const prices = {
-    "Yara": 45,
-    "D&G Devotion": 65,
-    "Delina": 75,
-    "L'Interdit": 65,
-    "Interdit": 65,
-    "Kayali": 55,
-    "My Burberry": 60,
-    "Prada": 45
-};
+(function(){
+"use strict";
 
 const DELIVERY_FEE = 7;
 const CART_KEY = "goldPafrumsCart";
 
-function getCart() {
-    try {
-        let cart = JSON.parse(localStorage.getItem(CART_KEY));
+const prices = {
+  "Yara":45,
+  "Prada":45,
+  "Delina":75,
+  "D&G Devotion":65,
+  "L'Interdit":65,
+  "Interdit":65,
+  "Kayali":55,
+  "My Burberry":60
+};
 
-        if (!Array.isArray(cart)) {
-            // Récupérer aussi les anciens paniers si présents.
-            cart = JSON.parse(localStorage.getItem("goldCart"));
-        }
-
-        if (!Array.isArray(cart)) return [];
-
-        return cart.map(function(item) {
-            const name = item.name || item.product;
-            const qty = Number(item.quantity || item.qty || 1);
-
-            return {
-                name: name,
-                qty: qty
-            };
-        }).filter(function(item) {
-            return item.name && prices[item.name] && item.qty > 0;
-        });
-    } catch (error) {
-        return [];
-    }
+function readStoredCart(key){
+  try{
+    const value = JSON.parse(localStorage.getItem(key));
+    return Array.isArray(value) ? value : [];
+  }catch(error){
+    return [];
+  }
 }
 
-function saveCart(cart) {
-   localStorage.setItem("goldPafrumsCart", JSON.stringify(cart));
-        cart.map(function(item) {
-            return {
-                name: item.name,
-                price: prices[item.name],
-                quantity: item.qty,
-                qty: item.qty
-            };
-        })
-    ));
-}
+function getCart(){
+  let stored = readStoredCart(CART_KEY);
 
-function render() {
-    const cart = getCart();
-    const container = document.getElementById("cart");
-    container.innerHTML = "";
+  // Compatibilité avec l'ancien panier.
+  if(stored.length === 0){
+    stored = readStoredCart("goldCart");
+  }
 
-    let subtotal = 0;
+  const result = [];
 
-    if (cart.length === 0) {
-        container.innerHTML =
-            '<p class="empty">Votre panier est vide. Découvrez nos parfums !</p>';
-        document.getElementById("subtotal").textContent = "0 DT";
-        document.getElementById("delivery").textContent = "0 DT";
-        document.getElementById("total").textContent = "0 DT";
-        return;
-    }
+  stored.forEach(function(item){
+    if(!item) return;
 
-    cart.forEach(function(item, index) {
-        const price = prices[item.name];
-        const qty = item.qty;
-        subtotal += price * qty;
+    const name = String(item.name || item.product || "").trim();
+    const price = prices[name];
 
-        const row = document.createElement("div");
-        row.className = "item";
+    if(!price) return;
 
-        const info = document.createElement("div");
-        const name = document.createElement("strong");
-        name.textContent = item.name;
+    const qty = Math.max(0, Math.floor(Number(
+      item.quantity || item.qty || 1
+    )));
 
-        const details = document.createElement("p");
-        details.textContent =
-            price + " DT / unité — Total : " + (price * qty) + " DT";
+    if(qty < 1) return;
 
-        info.append(name, details);
-
-        const controls = document.createElement("div");
-        controls.className = "item-controls";
-
-        const minus = document.createElement("button");
-        minus.type = "button";
-        minus.textContent = "−";
-        minus.dataset.action = "minus";
-        minus.dataset.index = index;
-
-        const quantity = document.createElement("span");
-        quantity.textContent = qty;
-
-        const plus = document.createElement("button");
-        plus.type = "button";
-        plus.textContent = "+";
-        plus.dataset.action = "plus";
-        plus.dataset.index = index;
-
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "remove";
-        remove.textContent = "Supprimer";
-        remove.dataset.action = "remove";
-        remove.dataset.index = index;
-
-        controls.append(minus, quantity, plus, remove);
-        row.append(info, controls);
-        container.appendChild(row);
+    const existing = result.find(function(row){
+      return row.name === name;
     });
 
-    document.getElementById("subtotal").textContent = subtotal + " DT";
-    document.getElementById("delivery").textContent = DELIVERY_FEE + " DT";
-    document.getElementById("total").textContent =
-        (subtotal + DELIVERY_FEE) + " DT";
+    if(existing){
+      existing.qty += qty;
+    }else{
+      result.push({name:name,qty:qty});
+    }
+  });
 
-    saveCart(cart);
+  return result;
 }
 
-document.getElementById("cart").addEventListener("click", function(event) {
-    const button = event.target.closest("button[data-action]");
-    if (!button) return;
+function saveCart(cart){
+  const compatibleCart = cart.map(function(item){
+    return {
+      name:item.name,
+      product:item.name,
+      price:prices[item.name],
+      quantity:item.qty,
+      qty:item.qty
+    };
+  });
 
-    const cart = getCart();
-    const index = Number(button.dataset.index);
+  localStorage.setItem(CART_KEY,JSON.stringify(compatibleCart));
+  // Maintient aussi la compatibilité avec les anciennes pages.
+  localStorage.setItem("goldCart",JSON.stringify(
+    cart.map(function(item){
+      return {name:item.name,qty:item.qty};
+    })
+  ));
+}
 
-    if (!cart[index]) return;
+function render(){
+  const cart = getCart();
+  const container = document.getElementById("cart");
+  container.innerHTML = "";
 
-    if (button.dataset.action === "plus") {
-        cart[index].qty++;
-    } else if (button.dataset.action === "minus") {
-        cart[index].qty--;
-    } else if (button.dataset.action === "remove") {
-        cart.splice(index, 1);
-    }
+  let subtotal = 0;
 
-    saveCart(cart.filter(function(item) {
-        return item.qty > 0;
-    }));
+  if(cart.length === 0){
+    container.innerHTML =
+      '<p class="empty">Votre panier est vide. Découvrez nos parfums !</p>';
 
-    render();
+    document.getElementById("subtotal").textContent = "0 DT";
+    document.getElementById("delivery").textContent = "0 DT";
+    document.getElementById("total").textContent = "0 DT";
+    return;
+  }
+
+  cart.forEach(function(item,index){
+    const price = prices[item.name];
+    const lineTotal = price * item.qty;
+    subtotal += lineTotal;
+
+    const row = document.createElement("div");
+    row.className = "item";
+
+    const info = document.createElement("div");
+    const name = document.createElement("strong");
+    name.textContent = item.name;
+
+    const details = document.createElement("p");
+    details.textContent =
+      price + " DT / unité — Total : " + lineTotal + " DT";
+
+    info.append(name,details);
+
+    const controls = document.createElement("div");
+    controls.className = "item-controls";
+
+    const minus = document.createElement("button");
+    minus.type = "button";
+    minus.textContent = "−";
+    minus.setAttribute("aria-label","Diminuer " + item.name);
+    minus.dataset.action = "minus";
+    minus.dataset.index = index;
+
+    const quantity = document.createElement("span");
+    quantity.textContent = item.qty;
+
+    const plus = document.createElement("button");
+    plus.type = "button";
+    plus.textContent = "+";
+    plus.setAttribute("aria-label","Augmenter " + item.name);
+    plus.dataset.action = "plus";
+    plus.dataset.index = index;
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "remove";
+    remove.textContent = "Supprimer";
+    remove.dataset.action = "remove";
+    remove.dataset.index = index;
+
+    controls.append(minus,quantity,plus,remove);
+    row.append(info,controls);
+    container.appendChild(row);
+  });
+
+  const delivery = subtotal > 0 ? DELIVERY_FEE : 0;
+
+  document.getElementById("subtotal").textContent = subtotal + " DT";
+  document.getElementById("delivery").textContent = delivery + " DT";
+  document.getElementById("total").textContent =
+    (subtotal + delivery) + " DT";
+
+  saveCart(cart);
+}
+
+document.getElementById("cart").addEventListener("click",function(event){
+  const button = event.target.closest("button[data-action]");
+  if(!button) return;
+
+  const cart = getCart();
+  const index = Number(button.dataset.index);
+
+  if(!Number.isInteger(index) || !cart[index]) return;
+
+  if(button.dataset.action === "plus"){
+    cart[index].qty += 1;
+  }else if(button.dataset.action === "minus"){
+    cart[index].qty -= 1;
+  }else if(button.dataset.action === "remove"){
+    cart.splice(index,1);
+  }
+
+  saveCart(cart.filter(function(item){
+    return item.qty > 0;
+  }));
+
+  render();
 });
 
-document.getElementById("order").addEventListener("click", function() {
-    if (getCart().length === 0) {
-        alert("Votre panier est vide.");
-        return;
-    }
+document.getElementById("order").addEventListener("click",function(){
+  const cart = getCart();
 
-    window.location.href = "commande.html";
+  if(cart.length === 0){
+    alert("Votre panier est vide.");
+    return;
+  }
+
+  saveCart(cart);
+  window.location.href = "commande.html";
 });
 
 render();
+})();
 </script>
 </body>
 </html>
