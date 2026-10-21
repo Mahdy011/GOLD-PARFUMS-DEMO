@@ -4,408 +4,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5efe4">
-<meta name="description" content="The Gold Parfum - Découvrez votre parfum préféré. Livraison en Tunisie.">
-<title>The Gold Parfum | Boutique de parfums</title>
+<meta name="theme-color" content="#f6f0e6">
+<meta name="description" content="GOLD PARFUM - Découvrez notre collection de parfums pour femme, homme et mixte.">
+<title>GOLD PARFUM | Boutique de parfums</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
 :root{
- --gold:#b8954b;
- --darkgold:#8e6d2f;
- --cream:#f7f2e9;
- --white:#fffdf9;
- --text:#29251e;
- --muted:#776f62;
+ --bg:#f7f2e9;--card:#fffdf9;--gold:#b99755;
+ --gold2:#87652c;--dark:#29251f;--muted:#817768;
+ --border:#e9decb;--lightgold:#efe3ce;
 }
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
- font-family:Arial,Helvetica,sans-serif;
- background:var(--cream);
- color:var(--text);
- line-height:1.6;
-}
-a{color:inherit;text-decoration:none}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--dark);line-height:1.6}
+a{text-decoration:none;color:inherit}
 button,input,select{font:inherit}
 button{cursor:pointer}
-header{
- background:#fffdf9;
- border-bottom:1px solid #e8dcc7;
- position:sticky;top:0;z-index:20;
-}
-.topbar{
- background:#29251e;color:#e7c879;
- text-align:center;padding:7px 12px;font-size:12px;
- letter-spacing:1px;
-}
-.nav{
- max-width:1180px;margin:auto;padding:15px 20px;
- display:flex;align-items:center;justify-content:space-between;
- gap:16px;
-}
-.logo{display:flex;align-items:center;gap:10px}
-.logo img{width:55px;height:55px;object-fit:contain}
-.logo-text{font-size:20px;font-weight:800;letter-spacing:1px}
-.logo-text span{color:var(--gold)}
-.nav-links{display:flex;align-items:center;gap:22px;font-size:14px}
-.nav-links a:hover{color:var(--darkgold)}
-.cart-link{
- background:var(--gold);padding:9px 14px;border-radius:5px;
- font-weight:bold;color:#fff;
-}
-.hero{
- max-width:1180px;margin:24px auto;padding:65px 7%;
- background:linear-gradient(115deg,#e9ddc7,#fffaf1 65%,#e9d7b2);
- border:1px solid #e5d3b3;border-radius:12px;
- display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:25px;
- overflow:hidden;
-}
-.eyebrow{
- color:var(--darkgold);font-size:12px;font-weight:bold;
- letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;
-}
-.hero h1{font-family:Georgia,serif;font-size:clamp(34px,5vw,59px);line-height:1.12;margin-bottom:18px}
-.hero h1 span{color:var(--darkgold)}
-.hero p{max-width:490px;color:#665b4b;margin-bottom:25px}
-.primary-btn{
- display:inline-block;background:var(--gold);color:white;
- border:0;border-radius:5px;padding:12px 22px;font-weight:bold;
- transition:.2s;
-}
-.primary-btn:hover{background:var(--darkgold);transform:translateY(-1px)}
-.hero-decoration{
- text-align:center;font-size:110px;color:#b8954b;
- font-family:Georgia,serif;opacity:.75;
-}
-.hero-decoration small{display:block;font-family:Arial,sans-serif;font-size:12px;letter-spacing:5px}
-.section{max-width:1180px;margin:45px auto;padding:0 20px}
-.section-heading{text-align:center;margin-bottom:25px}
-.section-heading h2{font-family:Georgia,serif;font-size:32px;font-weight:500}
-.section-heading p{color:var(--muted);font-size:14px;margin-top:5px}
-.categories{
- display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:25px;
-}
-.category-btn{
- border:1px solid #d9c7a7;background:var(--white);color:var(--text);
- padding:9px 19px;border-radius:25px;
-}
-.category-btn.active,.category-btn:hover{background:var(--gold);color:white;border-color:var(--gold)}
-.search-row{
- max-width:620px;margin:0 auto 28px;display:flex;gap:8px;
-}
-.search-row input{
- width:100%;min-width:0;padding:12px 15px;
- border:1px solid #d8c9b2;background:#fffdf9;border-radius:6px;outline:none;
-}
-.search-row input:focus{border-color:var(--gold)}
-.product-grid{
- display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;
-}
-.product-card{
- background:var(--white);border:1px solid #eadfce;border-radius:9px;
- overflow:hidden;transition:transform .2s,box-shadow .2s;
-}
-.product-card:hover{transform:translateY(-4px);box-shadow:0 10px 25px #4d35100d}
-.product-image{
- height:245px;background:#f1e8da;display:flex;align-items:center;justify-content:center;
- overflow:hidden;padding:12px;
-}
-.product-image img{width:100%;height:100%;object-fit:contain}
-.product-info{padding:15px}
-.product-tag{
- display:inline-block;background:#f0e4ce;color:#8e6d2f;
- padding:3px 8px;border-radius:3px;font-size:10px;text-transform:uppercase;
- letter-spacing:1px;margin-bottom:8px;
-}
-.product-card h3{font-size:17px;margin-bottom:5px}
-.product-description{font-size:12px;color:var(--muted);min-height:19px}
-.price{font-size:20px;font-weight:bold;color:var(--darkgold);margin:10px 0}
-.order-button{
- display:block;text-align:center;width:100%;border:0;
- background:#29251e;color:#fff;padding:11px 8px;border-radius:4px;
- font-weight:bold;font-size:13px;
-}
-.order-button:hover{background:var(--gold)}
-.empty-message{text-align:center;color:var(--muted);padding:30px;grid-column:1/-1}
-.benefits{
- display:grid;grid-template-columns:repeat(3,1fr);gap:15px;
-}
-.benefit{
- text-align:center;background:#fffdf9;border:1px solid #eadfce;
- border-radius:8px;padding:24px 15px;
-}
-.benefit .symbol{font-size:28px;margin-bottom:8px}
+img{display:block;max-width:100%}
+
+.announcement{background:var(--dark);color:#e9cf92;text-align:center;padding:8px 12px;font-size:11px;letter-spacing:1.5px}
+header{background:rgba(255,253,249,.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.nav{max-width:1200px;margin:auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand img{width:55px;height:55px;object-fit:contain}
+.brand-name{font-family:Georgia,serif;font-size:23px;font-weight:bold;letter-spacing:2px;line-height:1.15}
+.brand-name span{color:var(--gold2)}
+.links{display:flex;align-items:center;gap:25px;font-size:13px}
+.links a:hover{color:var(--gold2)}
+.cart{background:var(--dark);color:white!important;padding:10px 16px;border-radius:3px}
+.cart:hover{background:var(--gold2)}
+
+.hero{max-width:1200px;margin:25px auto 0;padding:0 24px}
+.hero-inner{min-height:350px;background:linear-gradient(115deg,#eadcc3,#fffaf1 65%,#e8d5b0);border:1px solid #e4d2b2;border-radius:5px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;padding:50px 8%;overflow:hidden}
+.kicker{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--gold2);font-weight:bold;margin-bottom:15px}
+.hero h1{font-family:Georgia,serif;font-size:clamp(38px,5vw,65px);font-weight:normal;line-height:1.1;margin-bottom:18px}
+.hero h1 span{color:var(--gold2);font-style:italic}
+.hero p{max-width:440px;color:#6f6352;font-size:15px;margin-bottom:27px}
+.btn{display:inline-block;border:0;background:var(--gold2);color:white;padding:13px 22px;border-radius:3px;font-weight:bold;font-size:13px}
+.btn:hover{background:var(--dark)}
+.hero-mark{text-align:center;font-family:Georgia,serif;font-size:155px;color:#b8954d;line-height:1;opacity:.8}
+.hero-mark small{display:block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:5px;margin-top:14px}
+
+.section{max-width:1200px;margin:55px auto;padding:0 24px}
+.heading{text-align:center;margin-bottom:27px}
+.heading .kicker{margin-bottom:7px}
+.heading h2{font-family:Georgia,serif;font-size:35px;font-weight:normal}
+.heading p{font-size:13px;color:var(--muted);margin-top:5px}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:24px}
+.categories{display:flex;gap:8px;flex-wrap:wrap}
+.cat{border:1px solid #d8c8ae;border-radius:25px;padding:9px 17px;background:var(--card);color:var(--dark);font-size:12px}
+.cat.active,.cat:hover{background:var(--gold2);border-color:var(--gold2);color:white}
+.searchbox{position:relative;min-width:230px;max-width:310px;flex:1}
+.searchbox input{width:100%;border:1px solid var(--border);background:var(--card);border-radius:3px;padding:11px 14px;outline:none;font-size:13px}
+.searchbox input:focus{border-color:var(--gold)}
+
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:19px}
+.product{min-width:0;background:var(--card);border:1px solid var(--border);border-radius:5px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.product:hover{transform:translateY(-4px);box-shadow:0 10px 28px #4d35100c}
+.photo{height:245px;background:#f0e7d8;display:flex;align-items:center;justify-content:center;padding:13px;overflow:hidden}
+.photo img{height:100%;width:100%;object-fit:contain}
+.photo-fallback{font-family:Georgia,serif;text-align:center;color:var(--gold2);font-size:17px;padding:15px}
+.info{padding:15px}
+.tag{display:inline-block;background:var(--lightgold);color:var(--gold2);padding:3px 8px;border-radius:2px;font-size:10px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:9px}
+.info h3{font-size:16px;font-weight:600;margin-bottom:3px}
+.desc{font-size:12px;color:var(--muted);min-height:20px}
+.price{font-size:20px;color:var(--gold2);font-weight:bold;margin:11px 0}
+.add{width:100%;background:var(--dark);color:white;border:0;border-radius:3px;padding:12px 6px;font-size:12px;font-weight:bold}
+.add:hover{background:var(--gold2)}
+.empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.benefit{background:var(--card);border:1px solid var(--border);padding:26px 16px;text-align:center;border-radius:4px}
+.benefit .icon{font-size:27px;color:var(--gold2);margin-bottom:8px}
 .benefit h3{font-size:15px;margin-bottom:5px}
-.benefit p{font-size:13px;color:var(--muted)}
-.contact-box{
- background:#eee1cc;border-radius:10px;padding:35px 20px;text-align:center;
-}
-.contact-box h2{font-family:Georgia,serif;font-size:29px;margin-bottom:8px}
-.contact-box p{color:var(--muted);margin-bottom:18px}
-footer{background:#29251e;color:#fff;text-align:center;margin-top:50px;padding:24px 15px}
-footer p{font-size:13px}
-footer .credit{color:#d5b56d;margin-top:5px}
+.benefit p{font-size:12px;color:var(--muted)}
+.contact{background:#eee2ce;text-align:center;padding:38px 20px;border-radius:5px}
+.contact h2{font-family:Georgia,serif;font-size:32px;font-weight:normal;margin-bottom:8px}
+.contact p{color:var(--muted);font-size:14px;margin-bottom:20px}
+footer{background:var(--dark);color:white;text-align:center;padding:23px 15px;margin-top:55px}
+footer p{font-size:12px}
+footer .credit{color:#d9ba72;margin-top:6px;letter-spacing:.4px}
+
 @media(max-width:900px){
- .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
- .product-image{height:220px}
- .hero{margin:18px 15px;padding:45px 6%}
+ .products{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .photo{height:220px}
+ .hero-inner{padding:40px 6%}
 }
 @media(max-width:650px){
- .nav{padding:10px 14px;flex-wrap:wrap}
- .logo img{width:43px;height:43px}
- .logo-text{font-size:16px}
- .nav-links{width:100%;justify-content:space-between;gap:8px;font-size:13px}
- .hero{grid-template-columns:1fr;margin:14px 12px;padding:35px 23px}
- .hero-decoration{display:none}
- .section{margin:35px auto;padding:0 12px}
- .section-heading h2{font-size:27px}
- .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
- .product-image{height:175px;padding:8px}
- .product-info{padding:10px}
- .product-card h3{font-size:15px}
- .price{font-size:18px}
- .order-button{font-size:12px;padding:10px 4px}
+ .nav{padding:10px 14px;flex-wrap:wrap;gap:12px}
+ .brand img{width:43px;height:43px}
+ .brand-name{font-size:18px}
+ .links{width:100%;justify-content:space-between;gap:8px;font-size:12px}
+ .cart{padding:8px 10px}
+ .hero{padding:0 12px;margin-top:14px}
+ .hero-inner{grid-template-columns:1fr;padding:36px 23px;min-height:auto}
+ .hero-mark{display:none}
+ .hero h1{font-size:43px}
+ .section{padding:0 12px;margin:40px auto}
+ .heading h2{font-size:29px}
+ .toolbar{align-items:stretch}
+ .searchbox{max-width:none;flex-basis:100%}
+ .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .photo{height:175px;padding:8px}
+ .info{padding:10px}
+ .info h3{font-size:14px}
+ .desc{font-size:11px}
+ .price{font-size:18px;margin:8px 0}
+ .add{font-size:11px;padding:11px 3px}
  .benefits{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
+<div class="announcement">L'ÉLÉGANCE À CHAQUE GOUTTE · GOLD PARFUM</div>
+
 <header>
- <div class="topbar">L'ÉLÉGANCE À CHAQUE GOUTTE · THE GOLD PARFUM</div>
  <nav class="nav">
-  <a href="index.html" class="logo">
-   <img src="Photos/pdp.jpg" alt="Logo The Gold Parfum">
-   <div class="logo-text">THE <span>GOLD</span><br>PARFUM</div>
+  <a href="index.html" class="brand">
+   <img src="Photos/pdp.jpg" alt="Logo Gold Parfum">
+   <div class="brand-name">GOLD <span>PARFUM</span></div>
   </a>
-  <div class="nav-links">
+  <div class="links">
    <a href="#accueil">Accueil</a>
-   <a href="#produits">Parfums</a>
-   <a href="#contact">Contact</a>
-   <a href="panier.html" class="cart-link">Mon panier 🛍</a>
+   <a href="#parfums">Nos parfums</a>
+   <a href="#services">Services</a>
+   <a href="panier.html" class="cart">🛍 Mon panier</a>
   </div>
  </nav>
 </header>
 
 <main>
 <section class="hero" id="accueil">
- <div>
-  <div class="eyebrow">Votre signature olfactive</div>
-  <h1>Le luxe dans<br>chaque <span>goutte.</span></h1>
-  <p>Découvrez notre sélection de parfums pour toutes vos envies. Trouvez la fragrance qui vous ressemble.</p>
-  <a href="#produits" class="primary-btn">Découvrir les parfums</a>
+ <div class="hero-inner">
+  <div>
+   <div class="kicker">La beauté d'une fragrance</div>
+   <h1>Votre parfum.<br>Votre <span>signature.</span></h1>
+   <p>Découvrez une collection de parfums soigneusement sélectionnés pour révéler votre élégance, chaque jour.</p>
+   <a href="#parfums" class="btn">Découvrir la collection</a>
+  </div>
+  <div class="hero-mark">G<small>GOLD PARFUM</small></div>
  </div>
- <div class="hero-decoration">G<small>THE GOLD PARFUM</small></div>
 </section>
 
-<section class="section" id="produits">
- <div class="section-heading">
-  <div class="eyebrow">Notre sélection</div>
+<section class="section" id="parfums">
+ <div class="heading">
+  <div class="kicker">La collection</div>
   <h2>Nos parfums</h2>
-  <p>Choisissez votre parfum préféré.</p>
+  <p>Trouvez la fragrance qui vous ressemble.</p>
  </div>
 
- <div class="categories">
-  <button class="category-btn active" data-category="Tous">Tous</button>
-  <button class="category-btn" data-category="Femme">Femme</button>
-  <button class="category-btn" data-category="Homme">Homme</button>
-  <button class="category-btn" data-category="Mixte">Mixte</button>
+ <div class="toolbar">
+  <div class="categories">
+   <button class="cat active" data-category="Tous">Tous</button>
+   <button class="cat" data-category="Femme">Femme</button>
+   <button class="cat" data-category="Homme">Homme</button>
+   <button class="cat" data-category="Mixte">Mixte</button>
+  </div>
+  <div class="searchbox">
+   <input id="search" type="search" placeholder="⌕ Rechercher un parfum..." aria-label="Rechercher un parfum">
+  </div>
  </div>
 
- <div class="search-row">
-  <input type="search" id="search" placeholder="Rechercher un parfum..." aria-label="Rechercher un parfum">
- </div>
+ <div class="products" id="products">
 
- <div class="product-grid" id="product-grid">
-
-  <article class="product-card" data-name="Yara" data-category="Femme">
-   <div class="product-image">
-    <img src="Photos/yara.jpg" alt="Parfum Yara" loading="lazy">
-   </div>
-   <div class="product-info">
-    <span class="product-tag">Femme</span>
-    <h3>Yara</h3>
-    <p class="product-description">Doux et gourmand</p>
-    <div class="price">45 DT</div>
-    <a class="order-button" href="panier.html">Ajouter au panier</a>
-   </div>
+  <article class="product" data-name="Yara" data-category="Femme">
+   <div class="photo"><img src="Photos/yara.jpg" alt="Yara" loading="lazy"></div>
+   <div class="info"><span class="tag">Femme</span><h3>Yara</h3><p class="desc">Doux et gourmand</p><div class="price">45 DT</div><button class="add" data-product="Yara" data-price="45">Ajouter au panier</button></div>
   </article>
 
-  <article class="product-card" data-name="Prada" data-category="Femme">
-   <div class="product-image">
-    <img src="Photos/prada.jpg" alt="Parfum Prada" loading="lazy">
-   </div>
-   <div class="product-info">
-    <span class="product-tag">Femme</span>
-    <h3>Prada</h3>
-    <p class="product-description">Élégant et raffiné</p>
-    <div class="price">45 DT</div>
-    <a class="order-button" href="panier.html">Ajouter au panier</a>
-   </div>
+  <article class="product" data-name="Prada" data-category="Femme">
+   <div class="photo"><img src="Photos/prada.jpg" alt="Prada" loading="lazy"></div>
+   <div class="info"><span class="tag">Femme</span><h3>Prada</h3><p class="desc">Élégant et raffiné</p><div class="price">45 DT</div><button class="add" data-product="Prada" data-price="45">Ajouter au panier</button></div>
   </article>
 
-  <article class="product-card" data-name="Delina" data-category="Femme">
-   <div class="product-image">
-    <img src="Photos/delina.jpg" alt="Parfum Delina" loading="lazy">
-   </div>
-   <div class="product-info">
-    <span class="product-tag">Femme</span>
-    <h3>Delina</h3>
-    <p class="product-description">Floral et sophistiqué</p>
-    <div class="price">75 DT</div>
-    <a class="order-button" href="panier.html">Ajouter au panier</a>
-   </div>
+  <article class="product" data-name="Delina" data-category="Femme">
+   <div class="photo"><img src="Photos/delina.jpg" alt="Delina" loading="lazy"></div>
+   <div class="info"><span class="tag">Femme</span><h3>Delina</h3><p class="desc">Floral et sophistiqué</p><div class="price">75 DT</div><button class="add" data-product="Delina" data-price="75">Ajouter au panier</button></div>
   </article>
 
-  <article class="product-card" data-name="D&G Devotion" data-category="Femme">
-   <div class="product-image">
-    <img src="Photos/devotion.jpg" alt="Parfum D&G Devotion" loading="lazy">
-   </div>
-   <div class="product-info">
-    <span class="product-tag">Femme</span>
-    <h3>D&G Devotion</h3>
-    <p class="product-description">Chaleureux et délicat</p>
-    <div class="price">65 DT</div>
-    <a class="order-button" href="panier.html">Ajouter au panier</a>
-   </div>
+  <article class="product" data-name="D&G Devotion" data-category="Femme">
+   <div class="photo"><img src="Photos/devotion.jpg" alt="D&G Devotion" loading="lazy"></div>
+   <div class="info"><span class="tag">Femme</span><h3>D&G Devotion</h3><p class="desc">Chaleureux et délicat</p><div class="price">65 DT</div><button class="add" data-product="D&G Devotion" data-price="65">Ajouter au panier</button></div>
   </article>
 
-  <article class="product-card" data-name="L'Interdit" data-category="Femme">
-   <div class="product-image">
-    <img src="Photos/interdit.jpg" alt="Parfum L'Interdit" loading="lazy">
-   </div>
-   <div class="product-info">
-    <span class="product-tag">Femme</span>
-    <h3>L'Interdit</h3>
-    <p class="product-description">Intense et captivant</p>
-    <div class="price">65 DT</div>
-    <a class="order-button" href="panier.html">Ajouter au panier</a>
-   </div>
+  <article class="product" data-name="L'Interdit" data-category="Femme">
+   <div class="photo"><img src="Photos/interdit.jpg" alt="L'Interdit" loading="lazy"></div>
+   <div class="info"><span class="tag">Femme</span><h3>L'Interdit</h3><p class="desc">Intense et captivant</p><div class="price">65 DT</div><button class="add" data-product="L'Interdit" data-price="65">Ajouter au panier</button></div>
   </article>
 
-  <article class="product-card" data-name="Kayali" data-category="Mixte">
-   <div class="product-image">
-    <img src="Photos/kayali.jpg" alt="Parfum Kayali" loading="lazy">
-   </div>
-   <div class="product-info">
-    <span class="product-tag">Mixte</span>
-    <h3>Kayali</h3>
-    <p class="product-description">Moderne et gourmand</p>
-    <div class="price">55 DT</div>
-    <a class="order-button" href="panier.html">Ajouter au panier</a>
-   </div>
+  <article class="product" data-name="Kayali" data-category="Mixte">
+   <div class="photo"><img src="Photos/kayali.jpg" alt="Kayali" loading="lazy"></div>
+   <div class="info"><span class="tag">Mixte</span><h3>Kayali</h3><p class="desc">Moderne et gourmand</p><div class="price">55 DT</div><button class="add" data-product="Kayali" data-price="55">Ajouter au panier</button></div>
   </article>
 
-  <article class="product-card" data-name="My Burberry" data-category="Femme">
-   <div class="product-image">
-    <img src="Photos/my-burberry.jpg" alt="Parfum My Burberry" loading="lazy">
-   </div>
-   <div class="product-info">
-    <span class="product-tag">Femme</span>
-    <h3>My Burberry</h3>
-    <p class="product-description">Classique et élégant</p>
-    <div class="price">60 DT</div>
-    <a class="order-button" href="panier.html">Ajouter au panier</a>
-   </div>
+  <article class="product" data-name="My Burberry" data-category="Femme">
+   <div class="photo"><img src="Photos/my-burberry.jpg" alt="My Burberry" loading="lazy"></div>
+   <div class="info"><span class="tag">Femme</span><h3>My Burberry</h3><p class="desc">Classique et élégant</p><div class="price">60 DT</div><button class="add" data-product="My Burberry" data-price="60">Ajouter au panier</button></div>
   </article>
 
  </div>
- <p id="empty-message" class="empty-message" hidden>Aucun parfum trouvé.</p>
+ <p class="empty" id="empty" hidden>Aucun parfum trouvé. Essayez un autre nom.</p>
+</section>
+
+<section class="section" id="services">
+ <div class="heading">
+  <div class="kicker">À votre service</div>
+  <h2>Une expérience élégante</h2>
+  <p>Nous vous accompagnons dans votre choix.</p>
+ </div>
+ <div class="benefits">
+  <div class="benefit"><div class="icon">✧</div><h3>Une belle sélection</h3><p>Des parfums pour différentes envies et personnalités.</p></div>
+  <div class="benefit"><div class="icon">♡</div><h3>Commande simple</h3><p>Choisissez vos parfums et préparez votre commande.</p></div>
+  <div class="benefit"><div class="icon">◇</div><h3>Livraison</h3><p>Les frais et les zones de livraison sont à confirmer avant commande.</p></div>
+ </div>
 </section>
 
 <section class="section">
- <div class="section-heading">
-  <h2>Votre expérience parfumée</h2>
-  <p>Un service pensé pour vous.</p>
- </div>
- <div class="benefits">
-  <div class="benefit">
-   <div class="symbol">✦</div>
-   <h3>Une sélection élégante</h3>
-   <p>Des fragrances pour chaque personnalité.</p>
-  </div>
-  <div class="benefit">
-   <div class="symbol">♡</div>
-   <h3>Un service attentionné</h3>
-   <p>Nous sommes là pour vous accompagner.</p>
-  </div>
-  <div class="benefit">
-   <div class="symbol">✧</div>
-   <h3>Livraison</h3>
-   <p>Frais et zones de livraison à confirmer lors de la commande.</p>
-  </div>
- </div>
-</section>
-
-<section class="section" id="contact">
- <div class="contact-box">
-  <h2>Trouvez votre signature</h2>
-  <p>Choisissez votre parfum et passez votre commande en quelques étapes.</p>
-  <a href="panier.html" class="primary-btn">Commander maintenant</a>
+ <div class="contact">
+  <h2>Un parfum vous attend.</h2>
+  <p>Choisissez votre fragrance préférée et préparez votre commande.</p>
+  <a href="panier.html" class="btn">Voir mon panier</a>
  </div>
 </section>
 </main>
 
 <footer>
- <p>© 2026 The Gold Parfum — Tous droits réservés.</p>
+ <p>© 2026 GOLD PARFUM — Tous droits réservés.</p>
  <p class="credit">Developed by DADI 1008</p>
 </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function(){
  const search = document.getElementById("search");
- const buttons = document.querySelectorAll(".category-btn");
- const cards = document.querySelectorAll(".product-card");
- const empty = document.getElementById("empty-message");
- let selectedCategory = "Tous";
+ const cards = [...document.querySelectorAll(".product")];
+ const categoryButtons = [...document.querySelectorAll(".cat")];
+ const empty = document.getElementById("empty");
+ let category = "Tous";
 
- function filterProducts() {
-  const term = search.value.trim().toLowerCase();
-  let visibleCount = 0;
-
-  cards.forEach(function (card) {
-   const name = card.dataset.name.toLowerCase();
-   const category = card.dataset.category;
-   const matchesName = name.includes(term);
-   const matchesCategory = selectedCategory === "Tous" || category === selectedCategory;
-   const visible = matchesName && matchesCategory;
-
-   card.style.display = visible ? "" : "none";
-   if (visible) visibleCount++;
+ function filter(){
+  const query = search.value.trim().toLowerCase();
+  let count = 0;
+  cards.forEach(card => {
+   const matchesName = card.dataset.name.toLowerCase().includes(query);
+   const matchesCategory = category === "Tous" || card.dataset.category === category;
+   const show = matchesName && matchesCategory;
+   card.hidden = !show;
+   if(show) count++;
   });
-
-  empty.hidden = visibleCount !== 0;
+  empty.hidden = count !== 0;
  }
+ search.addEventListener("input", filter);
+ categoryButtons.forEach(button => button.addEventListener("click", function(){
+  category = this.dataset.category;
+  categoryButtons.forEach(b => b.classList.toggle("active", b === this));
+  filter();
+ }));
 
- search.addEventListener("input", filterProducts);
+ // Jarrab asami fichiers mokhtalfa, 5ater GitHub yfarra9 bin majuscule/minuscule.
+ const alternatives = {
+  "Yara":["Photos/yara.jpg","Photos/Yara.jpg","Photos/YARA.jpg"],
+  "Prada":["Photos/prada.jpg","Photos/Prada.jpg","Photos/PRADA.jpg"],
+  "Delina":["Photos/delina.jpg","Photos/Delina.jpg","Photos/délina.jpg","Photos/Délina.jpg","Photos/Delina.JPG"],
+  "D&G Devotion":["Photos/devotion.jpg","Photos/Devotion.jpg","Photos/D&G Devotion.jpg","Photos/d&g devotion.jpg","Photos/dg-devotion.jpg","Photos/d&g-devotion.jpg"],
+  "L'Interdit":["Photos/interdit.jpg","Photos/Interdit.jpg","Photos/L'Interdit.jpg","Photos/linterdit.jpg","Photos/l-interdit.jpg"],
+  "Kayali":["Photos/kayali.jpg","Photos/Kayali.jpg","Photos/KAYALI.jpg"],
+  "My Burberry":["Photos/my-burberry.jpg","Photos/My Burberry.jpg","Photos/my burburry.jpg","Photos/My Burberry.jpg","Photos/myburberry.jpg","Photos/my-burburry.jpg"]
+ };
 
- buttons.forEach(function (button) {
-  button.addEventListener("click", function () {
-   selectedCategory = button.dataset.category;
-   buttons.forEach(function (item) {
-    item.classList.toggle("active", item === button);
-   });
-   filterProducts();
+ document.querySelectorAll(".product .photo img").forEach(img => {
+  const card = img.closest(".product");
+  const name = card.dataset.name;
+  const paths = alternatives[name] || [img.getAttribute("src")];
+  let attempt = 0;
+  img.addEventListener("error", function(){
+   while(attempt < paths.length && img.src.endsWith(paths[attempt].replace("Photos/","/GOLD-PARFUMS-DEMO/Photos/"))){
+    attempt++;
+   }
+   if(attempt < paths.length){
+    img.src = paths[attempt++];
+   }else{
+    img.hidden = true;
+    const fallback = document.createElement("div");
+    fallback.className = "photo-fallback";
+    fallback.textContent = name;
+    img.parentElement.appendChild(fallback);
+   }
   });
+  img.src = paths[0];
  });
 
- // Affiche une image de remplacement si le nom du fichier n'existe pas.
- document.querySelectorAll(".product-image img").forEach(function (img) {
-  img.addEventListener("error", function () {
-   if (img.dataset.failed === "true") return;
-   img.dataset.failed = "true";
-   img.style.display = "none";
-   const holder = img.parentElement;
-   holder.style.flexDirection = "column";
-   const note = document.createElement("span");
-   note.textContent = img.alt;
-   note.style.cssText = "font-family:Georgia,serif;color:#8e6d2f;text-align:center";
-   holder.appendChild(note);
+ // Ajout au panier local; panier.html doit lire la meme cle goldPafrumsCart.
+ document.querySelectorAll(".add").forEach(button => {
+  button.addEventListener("click", function(){
+   const product = this.dataset.product;
+   const price = Number(this.dataset.price);
+   let cart = [];
+   try { cart = JSON.parse(localStorage.getItem("goldPafrumsCart")) || []; } catch(e) {}
+   const existing = cart.find(item => item.name === product || item.product === product);
+   if(existing){
+    existing.quantity = Number(existing.quantity || existing.qty || 1) + 1;
+    if(existing.qty !== undefined) existing.qty = existing.quantity;
+   }else{
+    cart.push({name:product, price:price, quantity:1, qty:1});
+   }
+   localStorage.setItem("goldPafrumsCart", JSON.stringify(cart));
+   this.textContent = "Ajouté ✓";
+   const btn = this;
+   setTimeout(() => { btn.textContent = "Ajouter au panier"; }, 1400);
   });
  });
-
 });
 </script>
 </body>
 </html>
-
